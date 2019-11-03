@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stitch, GoogleRedirectCredential } from 'mongodb-stitch-browser-sdk';
-import { Button } from 'react-bootstrap';
-import logo from './logo.svg';
+import Layout from './comp/layout/Layout';
 import './App.css';
 
 class App extends React.Component {
@@ -51,20 +50,10 @@ class App extends React.Component {
     }
 
     render() {
-        const { currentUser } = this.state;
+        //const { currentUser } = this.state;
         return (
             <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-
-                    <p>
-            <Button variant="primary">Primary</Button>
-            Edit <code>src/App.js</code> and save to reload.
-                    </p>
-                    <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                        Learn React {!currentUser ? <div>User must authenticate.</div> : (currentUser.profile.first_name) }
-                    </a>
-                </header>
+                <Layout />
             </div>
         );
     }
