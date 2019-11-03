@@ -1,59 +1,56 @@
 import React from 'react';
-import { Stitch, GoogleRedirectCredential } from 'mongodb-stitch-browser-sdk';
+import { Stitch, RemoteMongoClient, GoogleRedirectCredential } from 'mongodb-stitch-browser-sdk';
 import Layout from './comp/layout/Layout';
 import './App.css';
 
 class App extends React.Component {
 
+    /**
+     *
+     * @param props
+     */
     constructor(props) {
-        super(props);
-        this.state = {
-            currentUser: false
-        }
+        super(props)
+        this.state = { user: false, db: false }
     }
 
+    /**
+     *
+     * @returns {Promise.<void>}
+     */
     async componentDidMount() {
         await this.setupStitch();
     }
 
-    //start stitch setup
+    /**
+     *
+     * @returns {Promise.<void>}
+     */
     async setupStitch() {
-        //copy the name of your google-auth enabled stitch application here
-        //the name of the app will typically be the stitch application name
-        //with a "-"" + random string appended
         const appId = 'everylist-lvlrz';
+        const client = Stitch.hasAppClient(appId) ? Stitch.getAppClient(appId) : Stitch.initializeAppClient(appId);
 
-        // Get a client for your Stitch app, or instantiate a new one
-        const client = Stitch.hasAppClient(appId)
-            ? Stitch.getAppClient(appId)
-            : Stitch.initializeAppClient(appId);
-
-        //manage user authentication state
-
-        // Check if this user has already authenticated and we're here
-        // from the redirect. If so, process the redirect to finish login.
         if (client.auth.hasRedirectResult()) {
             await client.auth.handleRedirectResult().catch(console.error);
-            console.log("Processed redirect result.")
         }
 
         if (client.auth.isLoggedIn) {
-            // The user is logged in. Add their user object to component state.
-            let currentUser = client.auth.user;
-            console.log(currentUser);
-            this.setState({ currentUser });
+            let user = client.auth.user;
+            let db = client.getServiceClient(RemoteMongoClient.factory, 'everylist').db('everylist');
+            this.setState({ user, db });
         } else {
-            // The user has not yet authenticated. Begin the Google login flow.
-            const credential = new GoogleRedirectCredential();
-            client.auth.loginWithRedirect(credential);
+            client.auth.loginWithRedirect(new GoogleRedirectCredential());
         }
     }
 
+    /**
+     *
+     * @returns {XML}
+     */
     render() {
-        //const { currentUser } = this.state;
         return (
             <div className="App">
-                <Layout />
+                <Layout app={this.state} />
             </div>
         );
     }
