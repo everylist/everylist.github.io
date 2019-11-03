@@ -7,23 +7,15 @@ class Layout extends React.Component {
 
     /**
      *
-     * @param props
-     */
-    constructor(props) {
-        super(props)
-    }
-
-    /**
-     *
      * @returns {XML}
      */
     render() {
         return (
             <div>
-                <Navbar app={this.props.app}/>
+                <Navbar app={this.props.app} />
 
                 <main role="main" className="container">
-                    <Lists />
+                    <Lists app={this.props.app} />
                 </main>
             </div>
         );

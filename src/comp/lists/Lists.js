@@ -36,14 +36,22 @@ class Lists extends React.Component {
      * @returns {XML}
      */
     render() {
+        const t = this.props.app.t
+
         const lists = this.state.lists.map((item, i) => (
             <div>
                 <h1>{ item._id }</h1>
             </div>
         ));
 
-        return (<div>{lists}</div>);
+        return (
+            <div>
+                <div>{t('Cavallo')}</div>
+
+                {lists}
+            </div>
+        );
     }
 }
 
-export default Navbar;
+export default Lists;

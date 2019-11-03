@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stitch, RemoteMongoClient, GoogleRedirectCredential } from 'mongodb-stitch-browser-sdk';
 import Layout from './comp/layout/Layout';
+import t from './t';
 import './App.css';
 
 class App extends React.Component {
@@ -11,7 +12,7 @@ class App extends React.Component {
      */
     constructor(props) {
         super(props)
-        this.state = { user: false, db: false }
+        this.state = { user: false, db: false, t }
     }
 
     /**

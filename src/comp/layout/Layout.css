@@ -13,6 +13,7 @@ body {
         top: 56px; /* Height of navbar */
         bottom: 0;
         width: 100%;
+        padding-top: 0.5rem;
         padding-right: 1rem;
         padding-left: 1rem;
         overflow-y: auto;
