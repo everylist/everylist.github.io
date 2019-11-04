@@ -12,7 +12,7 @@ class App extends React.Component {
      */
     constructor(props) {
         super(props)
-        this.state = { user: false, db: false, t }
+        this.state = { auth: false, db: false, t }
     }
 
     /**
@@ -36,11 +36,11 @@ class App extends React.Component {
         }
 
         if (client.auth.isLoggedIn) {
-            let user = client.auth.user;
+            let auth = client.auth;
             let db = client.getServiceClient(RemoteMongoClient.factory, 'everylist').db('everylist');
-            this.setState({ user, db });
+            this.setState({ auth, db });
         } else {
-            client.auth.loginWithRedirect(new GoogleRedirectCredential());
+            //client.auth.loginWithRedirect(new GoogleRedirectCredential());
         }
     }
 
