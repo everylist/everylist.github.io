@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListAlt } from '@fortawesome/free-solid-svg-icons'
+//import { faListAlt } from '@fortawesome/free-solid-svg-icons'
 import './Navbar.css';
 
 class Navbar extends React.Component {
@@ -30,7 +30,7 @@ class Navbar extends React.Component {
         const t = this.props.app.t
         return (
             <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-                <a className={"navbar-brand"} href="#goto"><FontAwesomeIcon icon={faListAlt} /> EveryList</a>
+                <a className={"navbar-brand"} href="#goto"><FontAwesomeIcon icon={"coffee"} /> EveryList</a>
                 <button className="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas" onClick={this.toggleOffcanvas}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
